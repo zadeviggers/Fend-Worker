@@ -1,4 +1,7 @@
-import { initialise, evaluateFendWithTimeout } from "npm:fend-wasm";
+import {
+  initialise,
+  evaluateFendWithTimeout,
+} from "https://esm.sh/fend-wasm@1.1.3";
 
 const timeout = 250; // Limit execution to 500ms
 
