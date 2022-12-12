@@ -2,7 +2,7 @@ import initialise, { evaluateFendWithTimeout } from "../lib/fend/fend_wasm.js";
 
 import { serve } from "https://deno.land/std@0.167.0/http/server.ts";
 
-const timeout = 5; // Limit execution to 5ms
+const timeout = 8; // Limit execution to 8ms since deno deploy has 10ms limit for total execution time.
 
 serve(async (request: Request) => {
   const query = new URL(request.url).searchParams.get("q");
