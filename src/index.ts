@@ -13,6 +13,13 @@ serve((request: Request) => {
   }
   try {
     const result = evaluateFendWithTimeout(query, timeout);
+    if (result === "Error: interrupted")
+      return new Response(
+        "Request took too long. Try again with a simpler query.",
+        { status: 400 }
+      );
+    else if (result.startsWith("Error"))
+      return new Response(result, { status: 500 });
     return new Response(result);
   } catch (e) {
     console.error(e);
