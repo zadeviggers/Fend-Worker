@@ -24,10 +24,12 @@ serve((request: Request) => {
 
     // OpenSearch suggestions
     // Read more here: https://udn.realityripple.com/docs/Archive/Add-ons/Supporting_search_suggestions_in_search_plugins#Implementing_search_suggestion_support_on_the_server
-    if (url.pathname.startsWith("/suggestions"))
-      return new Response(JSON.stringify([query, [`= ${result}`]]), {
+    if (url.pathname.startsWith("/suggestions")) {
+      const resString = url.searchParams.get("no-equals") ? result : `= ${result}`;
+      return new Response(JSON.stringify([query, [resString]]), {
         headers: { "Content-Type": "application/x-suggestions+json" },
       });
+    }
 
     return new Response(result);
   } catch (e) {
